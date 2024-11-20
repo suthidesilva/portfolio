@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suthira de Silva - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="cursor-glow"></div>
+    <div class="cursor-dot"></div>
+    <canvas id="gradient-canvas" class="gradient-bg"></canvas>
+
+    <!-- 3D AI Being Canvas -->
+    <canvas id="ai-being" class="absolute top-0 left-0 w-full h-screen pointer-events-none"></canvas>
+
+    <nav class="fixed w-full top-0 z-50 bg-gray-900/80 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold hover:text-purple-400 transition-colors">S.D</a>
+            <div id="desktop-nav" class="hidden md:flex space-x-8">
+                <a href="#work" class="nav-link">Projects</a>
+                <a href="#research" class="nav-link">Research</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <button id="menu-toggle" class="md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-gray-900 hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#work" class="mobile-nav-link">Projects</a>
+            <a href="#research" class="mobile-nav-link">Research</a>
+            <a href="#about" class="mobile-nav-link">About</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
+        </div>
+    </div>
+
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 py-32 relative z-10">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                Hi, I'm <span class="text-purple-400 hover:text-purple-300 transition-colors">Suthira de Silva</span><span class="text-purple-400">.</span>
+            </h1>
+            <p class="text-xl text-gray-300">
+                AI / LLM Researcher and Computer Science Student at College of Idaho,
+                focused on integrating Large Language Models with microcontrollers and automation systems.
+            </p>
+        </div>
+    </section>
+
+    <!-- Rest of the sections remain the same as in the previous version -->
+    <section id="work" class="py-32">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-16">Featured Projects</h2>
+            <div id="projects-grid" class="grid md:grid-cols-2 gap-8"></div>
+        </div>
+    </section>
+
+    <section id="research" class="py-32 bg-gray-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-16">Research Work</h2>
+            <div id="research-content" class="space-y-8"></div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8">About Me</h2>
+            <p class="text-gray-300 mb-12">
+                I am an AI/LLM Researcher at the College of Idaho, where I conduct
+                independent studies on integrating Large Language Models with
+                microcontrollers and Arduino automation systems. With a background in
+                computer science and physics, I am passionate about applying technology
+                to solve complex problems.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Education</h3>
+                    <div id="education-list"></div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Skills</h3>
+                    <div id="skills-list" class="flex flex-wrap gap-2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 bg-gray-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">Get in Touch</h2>
+            <div id="social-links" class="flex justify-center space-x-6"></div>
+        </div>
+    </section>
+
+    <footer class="py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-400">
+            © <span id="current-year"></span> - Suthira de Silva - Based in Caldwell, Idaho
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
