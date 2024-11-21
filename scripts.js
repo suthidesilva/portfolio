@@ -5,7 +5,7 @@ const data = {
             title: "YoteSwap",
             description: "A dynamic online platform for College of Idaho's 1,100 students, featuring a website and mobile app.",
             tags: ["Swift", "CSS", "Web Development"],
-            link: "#"
+            link: "https://saving-striking-turtle-952.vscodeedu.app/"
         },
         {
             title: "Fine-tuning Microsoft's Phi 2",
@@ -14,15 +14,15 @@ const data = {
             link: "https://github.com/yourusername/phi2-project"
         },
         {
-            title: "AI/LLM Integrated Microcontroller",
+            title: "AI / LLM Integrated Microcontroller",
             description: "Research project integrating LLMs with Raspberry Pi microcontrollers for portable robot assistants.",
             tags: ["Raspberry Pi", "LLM", "Automation"],
-            link: "#"
+            link: "https://github.com/suthidesilva/AI-Raspberry-Pi-Robotics-Python"
         }
     ],
     research: [
         {
-            title: "AI/LLM Microcontroller Integration",
+            title: "AI / LLM Microcontroller Integration",
             description: "Independent research on integrating Large Language Models with microcontrollers and Arduino automation systems.",
             period: "Feb 2024 - Present"
         },
@@ -55,16 +55,16 @@ const data = {
         "Data Science",
         "JavaScript",
         "Machine Learning",
-        "Research",
+        "Node.js",
+        "React",
         "Problem Solving"
     ],
     socials: [
-        { icon: 'github', url: 'https://github.com/yourusername' },
+        { icon: 'github', url: 'https://github.com/suthidesilva' },
         { icon: 'linkedin', url: 'https://www.linkedin.com/in/desilvasuthira/' },
-        { icon: 'mail', url: 'mailto:your.email@example.com' }
+        { icon: 'mail', url: 'mailto:suthiradesilva@gmail.com' }
     ]
 };
-
 
 // 3D AI Being
 class AIBeing {
@@ -102,10 +102,10 @@ class AIBeing {
             positions[i * 3 + 1] = (i / particleCount) * 40 - 20;
             positions[i * 3 + 2] = Math.sin(angle) * radius;
 
-            // Purple gradient colors
-            colors[i * 3] = 0.65 + Math.random() * 0.2;     // R
-            colors[i * 3 + 1] = 0.54 + Math.random() * 0.2; // G
-            colors[i * 3 + 2] = 0.98 + Math.random() * 0.2; // B
+            // Yellow gradient colors
+            colors[i * 3] = 1.0;     // R (full red for yellow)
+            colors[i * 3 + 1] = 1.0; // G (full green for yellow)
+            colors[i * 3 + 2] = 0.0; // B (no blue for yellow)
         }
 
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -128,8 +128,8 @@ class AIBeing {
         const ambientLight = new THREE.AmbientLight(0x404040);
         this.scene.add(ambientLight);
 
-        // Add point light
-        const pointLight = new THREE.PointLight(0xa78bfa, 2, 100);
+        // Add point light with yellow color
+        const pointLight = new THREE.PointLight(0xffff00, 2, 100);
         pointLight.position.set(10, 10, 10);
         this.scene.add(pointLight);
 
@@ -182,6 +182,87 @@ class AIBeing {
     }
 }
 
+// Content Rendering Functions
+function renderContent() {
+    // Projects
+    const projectsGrid = document.getElementById('projects-grid');
+    projectsGrid.innerHTML = data.projects.map(project => `
+        <div class="project-card p-6 rounded-lg enhanced-hover">
+            <h3 class="text-xl font-bold mb-4 text-yellow-400">${project.title}</h3>
+            <p class="text-gray-300 mb-6">${project.description}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                ${project.tags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
+            </div>
+            <a href="${project.link}" class="text-yellow-400 hover:text-yellow-300 inline-flex items-center">
+                View Project 
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
+        </div>
+    `).join('');
+
+    // Research
+    document.getElementById('research-content').innerHTML = data.research.map(item => `
+        <div class="research-item enhanced-hover">
+            <h3 class="text-xl font-bold mb-2 text-yellow-400">${item.title}</h3>
+            <p class="text-gray-300 mb-4">${item.description}</p>
+            <span class="text-sm text-yellow-400">${item.period}</span>
+        </div>
+    `).join('');
+
+    // Education
+    document.getElementById('education-list').innerHTML = data.education.map(item => `
+        <div class="education-item">
+            <h4 class="text-lg font-bold text-yellow-400">${item.school}</h4>
+            <p class="text-gray-300">${item.degree}</p>
+            <p class="text-sm text-yellow-400">${item.period}</p>
+            <p class="text-gray-400 mt-2">${item.details}</p>
+        </div>
+    `).join('');
+
+    // Skills
+    document.getElementById('skills-list').innerHTML = data.skills.map(skill => 
+        `<span class="skill-tag">${skill}</span>`
+    ).join('');
+
+    // Social Links
+    document.getElementById('social-links').innerHTML = data.socials.map(social => `
+        <a href="${social.url}" target="_blank" rel="noopener noreferrer" 
+            class="social-link p-3 rounded-full hover:bg-gray-800">
+            <i data-feather="${social.icon}"></i>
+        </a>
+    `).join('');
+}
+
+// Tab visibility handling
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        document.title = "Come back! 😌";
+    } else {
+        document.title = "Suthira de Silva - Portfolio";
+    }
+});
+
+// Scroll Message handling
+function handleScrollMessage() {
+    const scrollMessage = document.querySelector('.scroll-message');
+    let lastScrollTop = 0;
+    
+    // Hide scroll message on scroll
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            scrollMessage.classList.add('hidden');
+        } else if (scrollTop < 100) {
+            scrollMessage.classList.remove('hidden');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     new AIBeing();
@@ -189,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMobileMenu();
     renderContent();
     setupScrollAnimations();
+    handleScrollMessage();
     document.getElementById('current-year').textContent = new Date().getFullYear();
     feather.replace();
 });
@@ -232,13 +314,14 @@ function initializeCursor() {
         cursor.glow.style.transform = `translate(${cursor.pos.x}px, ${cursor.pos.y}px)`;
         cursor.dot.style.transform = `translate(${cursor.pos.dotX}px, ${cursor.pos.dotY}px)`;
 
+        // Yellow gradient
         const gradient = ctx.createRadialGradient(
             cursor.pos.x, cursor.pos.y, 0,
             cursor.pos.x, cursor.pos.y, 400
         );
         
-        gradient.addColorStop(0, 'rgba(167, 139, 250, 0.03)');
-        gradient.addColorStop(0.5, 'rgba(167, 139, 250, 0.01)');
+        gradient.addColorStop(0, 'rgba(255, 255, 0, 0.03)');
+        gradient.addColorStop(0.5, 'rgba(255, 255, 0, 0.01)');
         gradient.addColorStop(1, 'transparent');
         
         ctx.clearRect(0, 0, cursor.canvas.width, cursor.canvas.height);
@@ -252,7 +335,6 @@ function initializeCursor() {
 
     // Cursor interactions
     const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-tag');
-    
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
             cursor.glow.style.width = '400px';
@@ -268,59 +350,6 @@ function initializeCursor() {
             cursor.dot.style.height = '8px';
         });
     });
-}
-
-// Content Rendering Functions
-function renderContent() {
-    // Projects
-    const projectsGrid = document.getElementById('projects-grid');
-    projectsGrid.innerHTML = data.projects.map(project => `
-        <div class="project-card p-6 rounded-lg enhanced-hover">
-            <h3 class="text-xl font-bold mb-4 text-purple-400">${project.title}</h3>
-            <p class="text-gray-300 mb-6">${project.description}</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-                ${project.tags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
-            </div>
-            <a href="${project.link}" class="text-purple-400 hover:text-purple-300 inline-flex items-center">
-                View Project 
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                </svg>
-            </a>
-        </div>
-    `).join('');
-
-    // Research
-    document.getElementById('research-content').innerHTML = data.research.map(item => `
-        <div class="research-item enhanced-hover">
-            <h3 class="text-xl font-bold mb-2 text-purple-400">${item.title}</h3>
-            <p class="text-gray-300 mb-4">${item.description}</p>
-            <span class="text-sm text-purple-400">${item.period}</span>
-        </div>
-    `).join('');
-
-    // Education
-    document.getElementById('education-list').innerHTML = data.education.map(item => `
-        <div class="education-item">
-            <h4 class="text-lg font-bold text-purple-400">${item.school}</h4>
-            <p class="text-gray-300">${item.degree}</p>
-            <p class="text-sm text-purple-400">${item.period}</p>
-            <p class="text-gray-400 mt-2">${item.details}</p>
-        </div>
-    `).join('');
-
-    // Skills
-    document.getElementById('skills-list').innerHTML = data.skills.map(skill => 
-        `<span class="skill-tag">${skill}</span>`
-    ).join('');
-
-    // Social Links
-    document.getElementById('social-links').innerHTML = data.socials.map(social => `
-        <a href="${social.url}" target="_blank" rel="noopener noreferrer" 
-           class="social-link p-3 rounded-full hover:bg-gray-800">
-            <i data-feather="${social.icon}"></i>
-        </a>
-    `).join('');
 }
 
 // Mobile Menu Setup

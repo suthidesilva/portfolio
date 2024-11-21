@@ -1,7 +1,8 @@
 /* Base Styles */
 :root {
-    --primary: rgb(167, 139, 250);
-    --primary-light: rgba(167, 139, 250, 0.2);
+    --primary: #ffff00;
+    --primary-light: rgba(255, 255, 0, 0.2);
+    --primary-dark: #cccc00;
     --background: #111827;
     --surface: #1f2937;
     --text: #f9fafb;
@@ -31,17 +32,11 @@ body {
     pointer-events: none;
 }
 
-/* Hero Section Enhancement */
-.hero-content {
-    position: relative;
-    z-index: 10;
-}
-
 /* Cursor Effects */
 .cursor-glow {
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle at center, rgba(167, 139, 250, 0.15), transparent 50%);
+    background: radial-gradient(circle at center, rgba(255, 255, 0, 0.15), transparent 50%);
     position: fixed;
     pointer-events: none;
     z-index: 9999;
@@ -53,7 +48,7 @@ body {
 .cursor-dot {
     width: 8px;
     height: 8px;
-    background-color: rgba(167, 139, 250, 0.8);
+    background-color: rgba(255, 255, 0, 0.8);
     position: fixed;
     pointer-events: none;
     z-index: 10000;
@@ -114,7 +109,7 @@ body {
     position: absolute;
     inset: 0;
     background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
-        rgba(167, 139, 250, 0.1), transparent 40%);
+        rgba(255, 255, 0, 0.1), transparent 40%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -125,7 +120,7 @@ body {
 
 /* Skills and Tags */
 .skill-tag {
-    background: rgba(167, 139, 250, 0.1);
+    background: rgba(255, 255, 0, 0.1);
     color: var(--text);
     padding: 0.5rem 1rem;
     border-radius: 9999px;
@@ -133,9 +128,9 @@ body {
 }
 
 .skill-tag:hover {
-    background: rgba(167, 139, 250, 0.2);
+    background: rgba(255, 255, 0, 0.2);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(167, 139, 250, 0.2);
+    box-shadow: 0 5px 15px rgba(255, 255, 0, 0.2);
 }
 
 /* Education Timeline */
@@ -157,9 +152,51 @@ body {
     border-radius: 50%;
 }
 
+/* Scroll Message Styles */
+.scroll-message {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.scroll-message.hidden {
+    opacity: 0;
+}
+
+.scroll-indicator {
+    animation: float 2s ease-in-out infinite;
+}
+
+.scroll-dot {
+    animation: scrollDot 2s ease-in-out infinite;
+}
+
 /* Animations */
 .fade-in {
     animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes scrollDot {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(15px);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 @keyframes fadeIn {
@@ -173,13 +210,6 @@ body {
     }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .mobile-menu-open {
-        overflow: hidden;
-    }
-}
-
 /* Enhanced Hover Effects */
 .enhanced-hover {
     transition: all 0.3s ease;
@@ -187,5 +217,35 @@ body {
 
 .enhanced-hover:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 30px rgba(167, 139, 250, 0.2);
+    box-shadow: 0 0 30px rgba(255, 255, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mobile-menu-open {
+        overflow: hidden;
+    }
+    .scroll-message {
+        bottom: 8px;
+        font-size: 0.875rem;
+    }
+
+    .scroll-indicator svg {
+        width: 20px;
+        height: 32px;
+    }
+}
+
+/* Social Links */
+.social-link:hover {
+    color: var(--primary);
+    transform: translateY(-3px);
+}
+
+/* Gradient Background */
+.gradient-bg {
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 0, 0.05), 
+        rgba(31, 41, 55, 0.1)
+    );
 }
