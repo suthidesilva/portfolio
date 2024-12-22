@@ -19,7 +19,7 @@
 
     <nav class="fixed w-full top-0 z-50 bg-gray-900/80 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold hover:text-purple-400 transition-colors">S.D</a>
+            <a href="#" class="text-xl font-bold hover:text-yellow-400 transition-colors">S.D.S</a>
             <div id="desktop-nav" class="hidden md:flex space-x-8">
                 <a href="#work" class="nav-link">Projects</a>
                 <a href="#research" class="nav-link">Research</a>
@@ -34,6 +34,19 @@
         </div>
     </nav>
 
+    <!-- Scroll Message -->
+    <div class="scroll-message fixed left-1/2 transform -translate-x-1/2 bottom-12 z-50 flex items-center gap-4">
+        <div class="text-base md:text-lg text-yellow-400 font-medium tracking-wide">
+            Scroll down to explore my portfolio
+        </div>
+        <div class="scroll-indicator">
+            <svg width="24" height="40" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="38" rx="11" stroke="#FFFF00" stroke-width="2"/>
+                <circle class="scroll-dot" cx="12" cy="10" r="4" fill="#FFFF00"/>
+            </svg>
+        </div>
+    </div>
+
     <div id="mobile-menu" class="fixed inset-0 z-40 bg-gray-900 hidden">
         <div class="flex flex-col items-center justify-center h-full space-y-8">
             <a href="#work" class="mobile-nav-link">Projects</a>
@@ -46,7 +59,7 @@
     <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-4 py-32 relative z-10">
             <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                Hi, I'm <span class="text-purple-400 hover:text-purple-300 transition-colors">Suthira de Silva</span><span class="text-purple-400">.</span>
+                Hi, I'm <span class="text-yellow-400 hover:text-yellow-300 transition-colors">Suthira de Silva</span><span class="text-yellow-400">.</span>
             </h1>
             <p class="text-xl text-gray-300">
                 AI / LLM Researcher and Computer Science Student at College of Idaho,
@@ -55,7 +68,6 @@
         </div>
     </section>
 
-    <!-- Rest of the sections remain the same as in the previous version -->
     <section id="work" class="py-32">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-16">Featured Projects</h2>
