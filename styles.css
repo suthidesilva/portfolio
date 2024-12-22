@@ -1,8 +1,8 @@
 /* Base Styles */
 :root {
-    --primary: #ffff00;
-    --primary-light: rgba(255, 255, 0, 0.2);
-    --primary-dark: #cccc00;
+    --primary: #00DFFF;
+    --primary-light: rgba(0, 223, 255, 0.2);
+    --primary-dark: #00a3bf;
     --background: #111827;
     --surface: #1f2937;
     --text: #f9fafb;
@@ -10,7 +10,7 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior:smooth;
 }
 
 body {
@@ -22,7 +22,7 @@ body {
 }
 
 /* 3D AI Being Canvas */
-#ai-being {
+#ai-beings-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -31,12 +31,20 @@ body {
     z-index: 5;
     pointer-events: none;
 }
+.ai-being {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
 
 /* Cursor Effects */
 .cursor-glow {
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle at center, rgba(255, 255, 0, 0.15), transparent 50%);
+    background: radial-gradient(circle at center, rgba(0, 223, 255, 0.15), transparent 50%);
     position: fixed;
     pointer-events: none;
     z-index: 9999;
@@ -46,9 +54,9 @@ body {
 }
 
 .cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: rgba(255, 255, 0, 0.8);
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 223, 255, 0.8);
     position: fixed;
     pointer-events: none;
     z-index: 10000;
@@ -58,8 +66,25 @@ body {
 }
 
 /* Navigation */
+.logo-hover {
+    color: var(--text);
+    transition: color 0.3s ease;
+}
+.logo-hover:hover {
+    color: var(--primary);
+    text-shadow: 0 0 50px var(--primary);
+}
+
+.sds-name-hover {
+    color: var(--primary);
+    transition: text-shadow 0.3s ease;
+}
+.sds-name-hover:hover {
+    text-shadow: 0 0 50px var(--primary);
+}
+
 .nav-link {
-    color: var(--text-secondary);
+    color: var(--text);
     transition: all 0.3s ease;
     position: relative;
 }
@@ -85,7 +110,7 @@ body {
 
 .mobile-nav-link {
     font-size: 2rem;
-    color: var(--text-secondary);
+    color: var(--text);
     transition: color 0.3s ease;
 }
 
@@ -109,7 +134,7 @@ body {
     position: absolute;
     inset: 0;
     background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 0, 0.1), transparent 40%);
+        rgba(0, 223, 255, 0.1), transparent 40%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -118,9 +143,35 @@ body {
     opacity: 1;
 }
 
+.fade-text-container {
+    position: fixed;
+    top: calc(50vh - 4rem); /* Center between navigation bar and scroll message */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-text-container.hidden {
+    opacity: 0;
+    transform: translate(-50%, -60%); /* Slightly move upwards on hiding */
+}
+
+.fade-text {
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 1s ease, filter 1s ease;
+}
+
+.fade-text.active {
+    opacity: 1;
+    filter: blur(0);
+}
+
 /* Skills and Tags */
 .skill-tag {
-    background: rgba(255, 255, 0, 0.1);
+    background: rgba(0, 223, 255, 0.1);
     color: var(--text);
     padding: 0.5rem 1rem;
     border-radius: 9999px;
@@ -128,9 +179,9 @@ body {
 }
 
 .skill-tag:hover {
-    background: rgba(255, 255, 0, 0.2);
+    background: rgba(0, 223, 255, 0.2);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 255, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 223, 255, 0.2);
 }
 
 /* Education Timeline */
@@ -175,6 +226,18 @@ body {
     animation: fadeIn 0.6s ease forwards;
 }
 
+/* Add styles for the typewriter container */
+.typewriter-container {
+    z-index: 100;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.typewriter-container.hidden {
+    opacity: 0;
+}
+
 @keyframes float {
     0%, 100% {
         transform: translateY(0);
@@ -217,7 +280,7 @@ body {
 
 .enhanced-hover:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 30px rgba(255, 255, 0, 0.2);
+    box-shadow: 0 0 30px rgba(0, 223, 255, 0.2);
 }
 
 /* Responsive */
@@ -244,8 +307,24 @@ body {
 
 /* Gradient Background */
 .gradient-bg {
-    background: linear-gradient(45deg, 
-        rgba(255, 255, 0, 0.05), 
-        rgba(31, 41, 55, 0.1)
-    );
+    background: linear-gradient(45deg, rgba(31, 41, 55, 0.1), rgba(31, 41, 55, 0.1));
+}
+
+.rounded-border {
+    border: 2px solid var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+}
+
+.hire-me-bounce {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-70px);
+    }
+    50% {
+        transform: translateX(-50px);
+    }
 }
