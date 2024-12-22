@@ -66,13 +66,14 @@ const data = {
     ]
 };
 
-// 3D AI Being
+// 3D AI Being class for each instance
 class AIBeing {
-    constructor() {
+    constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({
-            canvas: document.getElementById('ai-being'),
+            canvas: this.canvas,
             alpha: true,
             antialias: true
         });
@@ -87,14 +88,12 @@ class AIBeing {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.camera.position.z = 30;
 
-        // Create particle geometry
         const particleCount = 1000;
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
         const colors = new Float32Array(particleCount * 3);
 
         for (let i = 0; i < particleCount; i++) {
-            // Create DNA helix shape
             const angle = (i / particleCount) * Math.PI * 8;
             const radius = 10;
             
@@ -102,16 +101,14 @@ class AIBeing {
             positions[i * 3 + 1] = (i / particleCount) * 40 - 20;
             positions[i * 3 + 2] = Math.sin(angle) * radius;
 
-            // Yellow gradient colors
-            colors[i * 3] = 1.0;     // R (full red for yellow)
-            colors[i * 3 + 1] = 1.0; // G (full green for yellow)
-            colors[i * 3 + 2] = 0.0; // B (no blue for yellow)
+            colors[i * 3] = 0.0;     // No red
+            colors[i * 3 + 1] = 0.87; // Green for blue hue
+            colors[i * 3 + 2] = 1.0; // Full blue
         }
 
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-        // Create particle material
         const material = new THREE.PointsMaterial({
             size: 0.2,
             vertexColors: true,
@@ -120,20 +117,16 @@ class AIBeing {
             blending: THREE.AdditiveBlending
         });
 
-        // Create particle system
         this.particleSystem = new THREE.Points(geometry, material);
         this.scene.add(this.particleSystem);
 
-        // Add ambient light
         const ambientLight = new THREE.AmbientLight(0x404040);
         this.scene.add(ambientLight);
 
-        // Add point light with yellow color
-        const pointLight = new THREE.PointLight(0xffff00, 2, 100);
+        const pointLight = new THREE.PointLight(0x00DFFF, 2, 100);
         pointLight.position.set(10, 10, 10);
         this.scene.add(pointLight);
 
-        // Event listeners
         window.addEventListener('resize', this.onWindowResize.bind(this));
         document.addEventListener('mousemove', this.onMouseMove.bind(this));
 
@@ -147,23 +140,18 @@ class AIBeing {
     }
 
     onMouseMove(event) {
-        // Convert mouse position to normalized device coordinates
         this.mousePosition.x = (event.clientX / window.innerWidth) * 2 - 1;
         this.mousePosition.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-        // Set target rotation based on mouse position
         this.targetRotation.x = this.mousePosition.y * 0.5;
         this.targetRotation.y = this.mousePosition.x * 0.5;
     }
 
     animate() {
         requestAnimationFrame(this.animate.bind(this));
-
-        // Smooth rotation
         this.particleSystem.rotation.x += (this.targetRotation.x - this.particleSystem.rotation.x) * 0.05;
         this.particleSystem.rotation.y += (this.targetRotation.y - this.particleSystem.rotation.y) * 0.05;
 
-        // Animate particles
         const positions = this.particleSystem.geometry.attributes.position.array;
         const time = Date.now() * 0.0001;
 
@@ -172,7 +160,6 @@ class AIBeing {
             const y = positions[i + 1];
             const z = positions[i + 2];
 
-            // Add wave effect
             positions[i] = x + Math.sin(time + y * 0.1) * 0.1;
             positions[i + 2] = z + Math.cos(time + y * 0.1) * 0.1;
         }
@@ -182,44 +169,45 @@ class AIBeing {
     }
 }
 
+
 // Content Rendering Functions
 function renderContent() {
     // Projects
     const projectsGrid = document.getElementById('projects-grid');
-    projectsGrid.innerHTML = data.projects.map(project => `
-        <div class="project-card p-6 rounded-lg enhanced-hover">
-            <h3 class="text-xl font-bold mb-4 text-yellow-400">${project.title}</h3>
+    projectsGrid.innerHTML = data.projects.map(project => 
+        `<div class="project-card p-6 rounded-lg enhanced-hover">
+            <h3 class="text-xl font-bold mb-4 text-[#00DFFF]">${project.title}</h3>
             <p class="text-gray-300 mb-6">${project.description}</p>
             <div class="flex flex-wrap gap-2 mb-4">
                 ${project.tags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
             </div>
-            <a href="${project.link}" class="text-yellow-400 hover:text-yellow-300 inline-flex items-center">
+            <a href="${project.link}" class="text-[#00DFFF] hover:text-[#00BFFF] inline-flex items-center">
                 View Project 
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                 </svg>
             </a>
-        </div>
-    `).join('');
+        </div>`
+    ).join('');
 
     // Research
-    document.getElementById('research-content').innerHTML = data.research.map(item => `
-        <div class="research-item enhanced-hover">
-            <h3 class="text-xl font-bold mb-2 text-yellow-400">${item.title}</h3>
+    document.getElementById('research-content').innerHTML = data.research.map(item => 
+        `<div class="research-item enhanced-hover">
+            <h3 class="text-xl font-bold mb-2 text-[#00DFFF]">${item.title}</h3>
             <p class="text-gray-300 mb-4">${item.description}</p>
-            <span class="text-sm text-yellow-400">${item.period}</span>
-        </div>
-    `).join('');
+            <span class="text-sm text-[#00DFFF]">${item.period}</span>
+        </div>`
+    ).join('');
 
     // Education
-    document.getElementById('education-list').innerHTML = data.education.map(item => `
-        <div class="education-item">
-            <h4 class="text-lg font-bold text-yellow-400">${item.school}</h4>
+    document.getElementById('education-list').innerHTML = data.education.map(item => 
+        `<div class="education-item">
+            <h4 class="text-lg font-bold text-[#00DFFF]">${item.school}</h4>
             <p class="text-gray-300">${item.degree}</p>
-            <p class="text-sm text-yellow-400">${item.period}</p>
+            <p class="text-sm text-[#00DFFF]">${item.period}</p>
             <p class="text-gray-400 mt-2">${item.details}</p>
-        </div>
-    `).join('');
+        </div>`
+    ).join('');
 
     // Skills
     document.getElementById('skills-list').innerHTML = data.skills.map(skill => 
@@ -227,45 +215,40 @@ function renderContent() {
     ).join('');
 
     // Social Links
-    document.getElementById('social-links').innerHTML = data.socials.map(social => `
-        <a href="${social.url}" target="_blank" rel="noopener noreferrer" 
+    document.getElementById('social-links').innerHTML = data.socials.map(social => 
+        `<a href="${social.url}" target="_blank" rel="noopener noreferrer" 
             class="social-link p-3 rounded-full hover:bg-gray-800">
             <i data-feather="${social.icon}"></i>
-        </a>
-    `).join('');
+        </a>`
+    ).join('');
 }
 
 // Tab visibility handling
 document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        document.title = "Come back! 😌";
-    } else {
-        document.title = "Suthira de Silva - Portfolio";
-    }
+    document.title = document.hidden ? "Come back! 😌" : "Suthira de Silva - Portfolio";
 });
 
 // Scroll Message handling
 function handleScrollMessage() {
     const scrollMessage = document.querySelector('.scroll-message');
     let lastScrollTop = 0;
-    
-    // Hide scroll message on scroll
+
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
         if (scrollTop > lastScrollTop && scrollTop > 100) {
             scrollMessage.classList.add('hidden');
         } else if (scrollTop < 100) {
             scrollMessage.classList.remove('hidden');
         }
-        
         lastScrollTop = scrollTop;
     });
 }
 
-// Initialize
+// Initialize multiple AI Beings
 document.addEventListener('DOMContentLoaded', () => {
-    new AIBeing();
+    const aiBeings = ['ai-being-1', 'ai-being-2', 'ai-being-3'];
+    aiBeings.forEach(id => new AIBeing(id));
+
     initializeCursor();
     setupMobileMenu();
     renderContent();
@@ -274,6 +257,49 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
     feather.replace();
 });
+
+
+const fadeTexts = [
+    "You are seeing an RNA molecule floating around in space.",
+    "Isn't RNA the most unique thing ever?",
+    "Hover around to see how it reacts to you.",
+];
+
+let currentIndex = 0;
+
+function updateFadeText() {
+    const fadeTextElement = document.getElementById('fade-text');
+
+    fadeTextElement.classList.remove('active');
+
+    setTimeout(() => {
+        fadeTextElement.textContent = fadeTexts[currentIndex];
+        currentIndex = (currentIndex + 1) % fadeTexts.length;
+
+        fadeTextElement.classList.add('active');
+    }, 1000);
+}
+
+// Smooth appearance and disappearance on scroll
+function handleScroll() {
+    const fadeContainer = document.getElementById('fade-text-container');
+    const windowHeight = window.innerHeight;
+    const scrollY = window.scrollY;
+
+    // Trigger smooth hide/reappear based on scroll position
+    if (scrollY > windowHeight / 4) {
+        fadeContainer.classList.add('hidden');
+    } else {
+        fadeContainer.classList.remove('hidden');
+    }
+}
+
+
+updateFadeText(); 
+setInterval(updateFadeText, 5000); 
+window.addEventListener('scroll', handleScroll);
+
+
 
 // Cursor Effects
 function initializeCursor() {
@@ -307,21 +333,20 @@ function initializeCursor() {
     });
 
     function animate() {
-        const ease = 0.15;
         cursor.pos.dotX += (cursor.pos.x - cursor.pos.dotX) * 0.2;
         cursor.pos.dotY += (cursor.pos.y - cursor.pos.dotY) * 0.2;
 
         cursor.glow.style.transform = `translate(${cursor.pos.x}px, ${cursor.pos.y}px)`;
         cursor.dot.style.transform = `translate(${cursor.pos.dotX}px, ${cursor.pos.dotY}px)`;
 
-        // Yellow gradient
+        // Blue gradient for cursor glow
         const gradient = ctx.createRadialGradient(
             cursor.pos.x, cursor.pos.y, 0,
             cursor.pos.x, cursor.pos.y, 400
         );
         
-        gradient.addColorStop(0, 'rgba(255, 255, 0, 0.03)');
-        gradient.addColorStop(0.5, 'rgba(255, 255, 0, 0.01)');
+        gradient.addColorStop(0, 'rgba(0, 223, 255, 0.03)');
+        gradient.addColorStop(0.5, 'rgba(0, 223, 255, 0.01)');
         gradient.addColorStop(1, 'transparent');
         
         ctx.clearRect(0, 0, cursor.canvas.width, cursor.canvas.height);
@@ -397,5 +422,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (target) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const skillsContainer = document.getElementById("skills-list");
+    const aboutSkills = document.querySelectorAll("#about #skills-list .skill-tag");
+
+    // Move skills from About section to Skills section
+    aboutSkills.forEach(skill => {
+        skillsContainer.appendChild(skill);
     });
 });
