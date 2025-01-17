@@ -22,10 +22,14 @@
 
     <nav class="fixed w-full top-0 z-50 bg-gray-900/80 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold logo-hover hire-me-bounce rounded-border">Hire me!</a>
+            <div class="name-profession">
+                <span class="name">Suthira de Silva</span>
+                <span class="profession">AI/LLM Researcher</span>
+            </div>
+            <a href="#contact-card" class="text-xl font-bold logo-hover hire-me-bounce rounded-border">Hire me!</a>
             <div id="desktop-nav" class="hidden md:flex space-x-8">
-                <a href="#work" class="nav-link">Projects</a>
                 <a href="#skills" class="nav-link">Skills</a>
+                <a href="#work" class="nav-link">Projects</a>
                 <a href="#research" class="nav-link">Research</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#contact" class="nav-link">Contact</a>
@@ -91,7 +95,7 @@
         </div>
     </section>
 
-    <section id="research" class="py-32 bg-gray-800">
+    <section id="research"  class="py-32">
         <div class="max-w-4xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-16">Research Work</h2>
             <div id="research-content" class="space-y-8"></div>
@@ -117,7 +121,30 @@
         </div>
     </section>
 
-    <section id="contact" class="py-32 bg-gray-800">
+    <section id="contact-card" class="py-16">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="glass-card bounce-effect shadow-lg p-8 rounded-lg relative">
+                <h2 class="text-3xl font-bold text-center mb-4">Wanna hire me? Contact Me</h2>
+                <form id="contact-form" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-lg font-medium">Name</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required />
+                    </div>
+                    <div>
+                        <label for="email" class="block text-lg font-medium">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Your email" required />
+                    </div>
+                    <div>
+                        <label for="message" class="block text-lg font-medium">Message</label>
+                        <textarea id="message" name="message" class="form-input" placeholder="Your message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn w-full py-3 rounded-lg">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="py-32">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-8">Get in Touch</h2>
             <div id="social-links" class="flex justify-center space-x-6"></div>
