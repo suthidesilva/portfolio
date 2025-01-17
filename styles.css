@@ -106,7 +106,7 @@ body {
 
 .nav-link:hover::after {
     width: 100%;
-}
+}e
 
 .mobile-nav-link {
     font-size: 2rem;
@@ -325,6 +325,81 @@ body {
         transform: translateX(-70px);
     }
     50% {
-        transform: translateX(-50px);
+        transform: translateX(-60px);
     }
+}
+
+.glass-card {
+    background: rgba(31, 41, 55, 0.8);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(255, 255, 255);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0px 15px rgba(0, 223, 255, 0.4);
+}
+
+.bounce-effect {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(31, 41, 55, 0.6);
+    color: #f9fafb;
+    font-size: 1rem;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+.form-input:focus {
+    background: rgba(31, 41, 55, 0.8);
+    box-shadow: 0 0 10px rgba(0, 223, 255, 0.5);
+}
+
+.submit-btn {
+    background: var(--text);
+    color: var(--background);
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+}
+
+.name-profession {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 1rem;
+}
+
+.name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text);
+}
+
+.profession {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
 }
