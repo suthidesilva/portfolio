@@ -18,6 +18,66 @@ const data = {
             description: "Research project integrating LLMs with Raspberry Pi microcontrollers for portable robot assistants.",
             tags: ["Raspberry Pi", "LLM", "Automation"],
             link: "https://github.com/suthidesilva/AI-Raspberry-Pi-Robotics-Python"
+        },
+        {
+            title: "Python-LLM-Adventure-game",
+            description: "A text-based adventure game leveraging LLMs for a dynamic and interactive narrative experience.",
+            tags: ["Python", "LLM", "Game Development"],
+            link: "https://github.com/suthidesilva/Python-LLM-Adventure-game"
+        },
+        {
+            title: "Portfolio",
+            description: "A personal portfolio showcasing projects and skills.",
+            tags: ["Web Development", "HTML", "CSS"],
+            link: "https://github.com/suthidesilva/portfolio"
+        },
+        {
+            title: "VectorDB-lab",
+            description: "PyTorch implementations of text classification models using pre-trained word embeddings.",
+            tags: ["Python", "PyTorch", "Machine Learning"],
+            link: "https://github.com/suthidesilva/VectorDB-lab"
+        },
+        {
+            title: "Python-LLMs-Chatbot-test",
+            description: "A Physics Helper Tool using APIs like GPT-3, Google Scholar, and Wolfram Alpha for problem-solving.",
+            tags: ["Python", "Chatbot", "LLM"],
+            link: "https://github.com/suthidesilva/Python-LLMs-Chatbot-test"
+        },
+        {
+            title: "Astronomy-database-SQL",
+            description: "Database schema and sample data for astronomical objects like galaxies, planets, and more.",
+            tags: ["SQL", "Database", "Astronomy"],
+            link: "https://github.com/suthidesilva/Astronomy-database-SQL"
+        },
+        {
+            title: "ML-with-Python-FCC-Course",
+            description: "Project files from the FreeCodeCamp Machine Learning with Python course.",
+            tags: ["Python", "Machine Learning", "Education"],
+            link: "https://github.com/suthidesilva/ML-with-Python-FCC-Course"
+        },
+        {
+            title: "Specify-7",
+            description: "Repository related to the Specify 7 project.",
+            tags: ["DBMS", "Specify 7"],
+            link: "https://github.com/suthidesilva/Specify-7"
+        },
+        {
+            title: "Courses-database-SQL",
+            description: "SQL scripts for course scheduling and management.",
+            tags: ["SQL", "Database", "Education"],
+            link: "https://github.com/suthidesilva/Courses-database-SQL"
+        },
+        {
+            title: "Alcohol-Consumption-database-SQL",
+            description: "Schema and data for a database tracking alcohol consumption statistics.",
+            tags: ["SQL", "Database", "Data Analysis"],
+            link: "https://github.com/suthidesilva/Alcohol-Consumption-database-SQL"
+        },
+        {
+            title: "Micro-plastics-Research",
+            description: "Database and machine learning development for analyzing microplastics content in water samples.",
+            tags: ["Python", "SQL", "Environmental Research"],
+            link: "https://github.com/suthidesilva/Micro-plastics-Research"
         }
     ],
     research: [
@@ -34,30 +94,58 @@ const data = {
     ],
     education: [
         {
-            school: "The College of Idaho",
+            school: "The College of Idaho, ID, United States",
             degree: "Bachelor's degree, Computer Science",
             period: "2021 - 2025",
             details: "Specializing in Data Science and Pre-Law, Minor in Mathematics, Philosophy, and Legal Psychology"
         },
         {
-            school: "Li Po Chun United World College of Hong Kong",
+            school: "Li Po Chun United World College, Wu Kai Sha, Hong Kong",
             degree: "International Baccalaureate Diploma",
             period: "2019 - 2021",
             details: "Physics HL, Economics HL, English HL"
+        },
+        {
+            school: "Rahula College, Matara, Sri Lanka",
+            degree: "GCE A/L & O/L",
+            period: "2017 - 2019",
+            details: "A-8, B-1"
         }
     ],
-    skills: [
+    skills: [ 
         "Large Language Models (LLM)",
         "Python",
         "SQL",
         "Scala",
-        "Building Automation Systems",
+        "Building Automation Systems (BAS)",
         "Data Science",
         "JavaScript",
         "Machine Learning",
         "Node.js",
         "React",
-        "Problem Solving"
+        "TensorFlow",
+        "PyTorch",
+        "C++",
+        "HTML",
+        "CSS",
+        ".NET",
+        "R",
+        "Matlab",
+        "Linux/Ubuntu Shell Scripting",
+        "Git (Version Control)",
+        "AWS",
+        "Azure",
+        "Object-Oriented Programming (OOP)",
+        "JQuery",
+        "JSON",
+        "Problem Solving",
+        "Critical Thinking",
+        "Time Management",
+        "Project Management",
+        "Risk Management",
+        "Public Speaking",
+        "3D Modeling (CAD)",
+        "Statistical Data Analysis"
     ],
     socials: [
         { icon: 'github', url: 'https://github.com/suthidesilva' },
@@ -261,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const fadeTexts = [
     "You are seeing an RNA molecule floating around in space.",
-    "Isn't RNA the most unique thing ever?",
+    "Isn't it truly unique?",
     "Hover around to see how it reacts to you.",
 ];
 
@@ -434,3 +522,30 @@ document.addEventListener("DOMContentLoaded", function() {
         skillsContainer.appendChild(skill);
     });
 });
+
+document.getElementById("contact-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+        const response = await fetch('https://formsubmit.co/suthiradesilva@gmail.com', { 
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            alert("Your message has been sent!");
+            this.reset();
+        } else {
+            alert("Failed to send message. Please try again.");
+        }
+    } catch (error) {
+        alert("An error occurred. Please try again.");
+    }
+});
+
+document.querySelector('.name').textContent = 'Suthira de Silva';
+document.querySelector('.profession').textContent = 'AI/LLM Researcher';
