@@ -154,6 +154,37 @@ const data = {
     ]
 };
 
+// Function to dynamically render projects and research
+function renderProjectsAndResearch() {
+    const projectsContainer = document.getElementById("projects-grid");
+    const researchContainer = document.getElementById("research-content");
+
+    data.projects.forEach((project) => {
+        projectsContainer.innerHTML += `
+            <div class="project-card">
+                <h3>${project.title}</h3>
+                <p>${project.description}</p>
+                <div class="tags">${project.tags.map(tag => `<span>${tag}</span>`).join("")}</div>
+                <a href="${project.link}" target="_blank">View Project</a>
+            </div>
+        `;
+    });
+
+    data.research.forEach((research) => {
+        researchContainer.innerHTML += `
+            <div class="research-item">
+                <h3>${research.title}</h3>
+                <p>${research.description}</p>
+                <a href="${research.link}" target="_blank">Learn More</a>
+                <p class="period">${research.period}</p>
+            </div>
+        `;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", renderProjectsAndResearch);
+
+
 // 3D AI Being class for each instance
 class AIBeing {
     constructor(canvasId) {
@@ -189,9 +220,9 @@ class AIBeing {
             positions[i * 3 + 1] = (i / particleCount) * 40 - 20;
             positions[i * 3 + 2] = Math.sin(angle) * radius;
 
-            colors[i * 3] = 0.0;     // No red
-            colors[i * 3 + 1] = 0.87; // Green for blue hue
-            colors[i * 3 + 2] = 1.0; // Full blue
+            colors[i * 3] = 0.75;  // Silver (high brightness for red channel)
+            colors[i * 3 + 1] = 0.75; // Silver (green channel)
+            colors[i * 3 + 2] = 0.75; // Silver (blue channel)
         }
 
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -211,7 +242,7 @@ class AIBeing {
         const ambientLight = new THREE.AmbientLight(0x404040);
         this.scene.add(ambientLight);
 
-        const pointLight = new THREE.PointLight(0x00DFFF, 2, 100);
+        const pointLight = new THREE.PointLight(0xC0C0C0, 2, 100); // Luxury silver point light
         pointLight.position.set(10, 10, 10);
         this.scene.add(pointLight);
 
@@ -264,12 +295,12 @@ function renderContent() {
     const projectsGrid = document.getElementById('projects-grid');
     projectsGrid.innerHTML = data.projects.map(project => 
         `<div class="project-card p-6 rounded-lg enhanced-hover">
-            <h3 class="text-xl font-bold mb-4 text-[#00DFFF]">${project.title}</h3>
-            <p class="text-gray-300 mb-6">${project.description}</p>
+            <h3 class="text-xl font-bold mb-4 text-[#C0C0C0]">${project.title}</h3>
+            <p class="text-gray-400 mb-6">${project.description}</p>
             <div class="flex flex-wrap gap-2 mb-4">
                 ${project.tags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
             </div>
-            <a href="${project.link}" class="text-[#00DFFF] hover:text-[#00BFFF] inline-flex items-center">
+            <a href="${project.link}" class="text-[#C0C0C0] hover:text-[#A9A9A9] inline-flex items-center">
                 View Project 
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -281,19 +312,19 @@ function renderContent() {
     // Research
     document.getElementById('research-content').innerHTML = data.research.map(item => 
         `<div class="research-item enhanced-hover">
-            <h3 class="text-xl font-bold mb-2 text-[#00DFFF]">${item.title}</h3>
-            <p class="text-gray-300 mb-4">${item.description}</p>
-            <span class="text-sm text-[#00DFFF]">${item.period}</span>
+            <h3 class="text-xl font-bold mb-2 text-[#C0C0C0]">${item.title}</h3>
+            <p class="text-gray-400 mb-4">${item.description}</p>
+            <span class="text-sm text-[#C0C0C0]">${item.period}</span>
         </div>`
     ).join('');
 
     // Education
     document.getElementById('education-list').innerHTML = data.education.map(item => 
         `<div class="education-item">
-            <h4 class="text-lg font-bold text-[#00DFFF]">${item.school}</h4>
-            <p class="text-gray-300">${item.degree}</p>
-            <p class="text-sm text-[#00DFFF]">${item.period}</p>
-            <p class="text-gray-400 mt-2">${item.details}</p>
+            <h4 class="text-lg font-bold text-[#C0C0C0]">${item.school}</h4>
+            <p class="text-gray-400">${item.degree}</p>
+            <p class="text-sm text-[#C0C0C0]">${item.period}</p>
+            <p class="text-gray-500 mt-2">${item.details}</p>
         </div>`
     ).join('');
 
@@ -311,9 +342,10 @@ function renderContent() {
     ).join('');
 }
 
+
 // Tab visibility handling
 document.addEventListener('visibilitychange', () => {
-    document.title = document.hidden ? "Come back! 😌" : "Suthira de Silva - Portfolio";
+    document.title = document.hidden ? "Come back! ✨" : "Suthira de Silva - Portfolio";
 });
 
 // Scroll Message handling
@@ -345,48 +377,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-year').textContent = new Date().getFullYear();
     feather.replace();
 });
-
-
-const fadeTexts = [
-    "You are seeing an RNA molecule floating around in space.",
-    "Isn't it truly unique?",
-    "Hover around to see how it reacts to you.",
-];
-
-let currentIndex = 0;
-
-function updateFadeText() {
-    const fadeTextElement = document.getElementById('fade-text');
-
-    fadeTextElement.classList.remove('active');
-
-    setTimeout(() => {
-        fadeTextElement.textContent = fadeTexts[currentIndex];
-        currentIndex = (currentIndex + 1) % fadeTexts.length;
-
-        fadeTextElement.classList.add('active');
-    }, 1000);
-}
-
-// Smooth appearance and disappearance on scroll
-function handleScroll() {
-    const fadeContainer = document.getElementById('fade-text-container');
-    const windowHeight = window.innerHeight;
-    const scrollY = window.scrollY;
-
-    // Trigger smooth hide/reappear based on scroll position
-    if (scrollY > windowHeight / 4) {
-        fadeContainer.classList.add('hidden');
-    } else {
-        fadeContainer.classList.remove('hidden');
-    }
-}
-
-
-updateFadeText(); 
-setInterval(updateFadeText, 5000); 
-window.addEventListener('scroll', handleScroll);
-
 
 
 // Cursor Effects
@@ -427,16 +417,16 @@ function initializeCursor() {
         cursor.glow.style.transform = `translate(${cursor.pos.x}px, ${cursor.pos.y}px)`;
         cursor.dot.style.transform = `translate(${cursor.pos.dotX}px, ${cursor.pos.dotY}px)`;
 
-        // Blue gradient for cursor glow
+        // Luxury silver gradient for cursor glow
         const gradient = ctx.createRadialGradient(
             cursor.pos.x, cursor.pos.y, 0,
             cursor.pos.x, cursor.pos.y, 400
         );
-        
-        gradient.addColorStop(0, 'rgba(0, 223, 255, 0.03)');
-        gradient.addColorStop(0.5, 'rgba(0, 223, 255, 0.01)');
+
+        gradient.addColorStop(0, 'rgba(192, 192, 192, 0.05)');
+        gradient.addColorStop(0.5, 'rgba(192, 192, 192, 0.02)');
         gradient.addColorStop(1, 'transparent');
-        
+
         ctx.clearRect(0, 0, cursor.canvas.width, cursor.canvas.height);
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, cursor.canvas.width, cursor.canvas.height);
@@ -501,10 +491,9 @@ function setupScrollAnimations() {
         observer.observe(el);
     });
 }
-
 // Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
@@ -513,7 +502,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const skillsContainer = document.getElementById("skills-list");
     const aboutSkills = document.querySelectorAll("#about #skills-list .skill-tag");
 
@@ -521,6 +510,10 @@ document.addEventListener("DOMContentLoaded", function() {
     aboutSkills.forEach(skill => {
         skillsContainer.appendChild(skill);
     });
+
+    // Update dynamic styles for the luxury theme
+    document.querySelector('.name').style.color = 'var(--primary)';
+    document.querySelector('.profession').style.color = 'var(--text-secondary)';
 });
 
 document.getElementById("contact-form").addEventListener("submit", async function (e) {
@@ -530,7 +523,7 @@ document.getElementById("contact-form").addEventListener("submit", async functio
     const data = Object.fromEntries(formData.entries());
 
     try {
-        const response = await fetch('https://formsubmit.co/suthiradesilva@gmail.com', { 
+        const response = await fetch('https://formsubmit.co/suthiradesilva@gmail.com', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -547,5 +540,97 @@ document.getElementById("contact-form").addEventListener("submit", async functio
     }
 });
 
-document.querySelector('.name').textContent = 'Suthira de Silva';
-document.querySelector('.profession').textContent = 'AI/LLM Researcher';
+// Cursor Effects
+function initializeCursor() {
+    const cursor = {
+        glow: document.querySelector('.cursor-glow'),
+        dot: document.querySelector('.cursor-dot'),
+        pos: { x: 0, y: 0, dotX: 0, dotY: 0 }
+    };
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.pos.x = e.clientX;
+        cursor.pos.y = e.clientY;
+    });
+
+    function animate() {
+        cursor.pos.dotX += (cursor.pos.x - cursor.pos.dotX) * 0.2;
+        cursor.pos.dotY += (cursor.pos.y - cursor.pos.dotY) * 0.2;
+
+        cursor.glow.style.transform = `translate(${cursor.pos.x}px, ${cursor.pos.y}px)`;
+        cursor.dot.style.transform = `translate(${cursor.pos.dotX}px, ${cursor.pos.dotY}px)`;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Interactive hover effects
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-tag');
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursor.glow.style.background = `radial-gradient(circle at center, var(--primary-light), transparent 50%)`;
+            cursor.glow.style.width = '400px';
+            cursor.glow.style.height = '400px';
+            cursor.dot.style.width = '12px';
+            cursor.dot.style.height = '12px';
+        });
+
+        element.addEventListener('mouseleave', () => {
+            cursor.glow.style.background = `radial-gradient(circle at center, var(--primary-light), transparent 50%)`;
+            cursor.glow.style.width = '300px';
+            cursor.glow.style.height = '300px';
+            cursor.dot.style.width = '10px';
+            cursor.dot.style.height = '10px';
+        });
+    });
+}
+
+// Initialize the custom cursor
+initializeCursor();
+
+// Scroll Animations
+function setupScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('section > div, .project-card, .research-item').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Initialize scroll animations
+setupScrollAnimations();
+
+// Update the current year in the footer
+document.getElementById('current-year').textContent = new Date().getFullYear();
+
+// Feather icon replacement
+feather.replace();
+
+// Scroll Message Visibility
+function handleScrollMessage() {
+    const scrollMessage = document.querySelector('.scroll-message');
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            scrollMessage.classList.add('hidden');
+        } else if (scrollTop < 100) {
+            scrollMessage.classList.remove('hidden');
+        }
+        lastScrollTop = scrollTop;
+    });
+}
+
+handleScrollMessage();

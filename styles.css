@@ -1,16 +1,17 @@
 /* Base Styles */
 :root {
-    --primary: #00DFFF;
-    --primary-light: rgba(0, 223, 255, 0.2);
-    --primary-dark: #00a3bf;
-    --background: #111827;
-    --surface: #1f2937;
-    --text: #f9fafb;
-    --text-secondary: #9ca3af;
+    --primary: #C0C0C0; /* Luxury silver */
+    --primary-light: rgba(192, 192, 192, 0.2); /* Light silver for subtle highlights */
+    --primary-dark: #A9A9A9; /* Dark silver for accents */
+    --background: #0D0D0D; /* Deep black */
+    --surface: #1A1A1A; /* Dark gray for surfaces */
+    --text: #EDEDED; /* Off-white for text */
+    --text-secondary: #B3B3B3; /* Light gray for secondary text */
+    --hover-glow: rgba(255, 255, 255, 0.5); /* Silver glow for hover effects */
 }
 
 html {
-    scroll-behavior:smooth;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -44,7 +45,7 @@ body {
 .cursor-glow {
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle at center, rgba(0, 223, 255, 0.15), transparent 50%);
+    background: radial-gradient(circle at center, var(--primary-light), transparent 50%);
     position: fixed;
     pointer-events: none;
     z-index: 9999;
@@ -56,7 +57,7 @@ body {
 .cursor-dot {
     width: 10px;
     height: 10px;
-    background-color: rgba(0, 223, 255, 0.8);
+    background-color: var(--primary);
     position: fixed;
     pointer-events: none;
     z-index: 10000;
@@ -72,7 +73,7 @@ body {
 }
 .logo-hover:hover {
     color: var(--primary);
-    text-shadow: 0 0 50px var(--primary);
+    text-shadow: 0 0 20px var(--hover-glow);
 }
 
 .sds-name-hover {
@@ -80,7 +81,7 @@ body {
     transition: text-shadow 0.3s ease;
 }
 .sds-name-hover:hover {
-    text-shadow: 0 0 50px var(--primary);
+    text-shadow: 0 0 30px var(--hover-glow);
 }
 
 .nav-link {
@@ -101,12 +102,12 @@ body {
 }
 
 .nav-link:hover {
-    text-shadow: 0 0 10px var(--primary-light);
+    text-shadow: 0 0 10px var(--hover-glow);
 }
 
 .nav-link:hover::after {
     width: 100%;
-}e
+}
 
 .mobile-nav-link {
     font-size: 2rem;
@@ -120,13 +121,16 @@ body {
 
 /* Cards and Elements */
 .project-card, .research-item, .card-hover-effect {
-    background: rgba(31, 41, 55, 0.5);
+    background: rgba(26, 26, 26, 0.5);
     backdrop-filter: blur(12px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform-style: preserve-3d;
     perspective: 1000px;
     position: relative;
     z-index: 1;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .project-card::before, .card-hover-effect::before {
@@ -134,7 +138,7 @@ body {
     position: absolute;
     inset: 0;
     background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
-        rgba(0, 223, 255, 0.1), transparent 40%);
+        var(--primary-light), transparent 40%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -143,35 +147,29 @@ body {
     opacity: 1;
 }
 
-.fade-text-container {
-    position: fixed;
-    top: calc(50vh - 4rem); /* Center between navigation bar and scroll message */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-    pointer-events: none;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.project-card:hover, .research-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px var(--hover-glow);
 }
 
-.fade-text-container.hidden {
-    opacity: 0;
-    transform: translate(-50%, -60%); /* Slightly move upwards on hiding */
+/* Tags within Cards */
+.tags span {
+    background: var(--primary-light);
+    border-radius: 8px;
+    padding: 2px 8px;
+    margin-right: 6px;
+    font-size: 0.85rem;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.fade-text {
-    opacity: 0;
-    filter: blur(10px);
-    transition: opacity 1s ease, filter 1s ease;
-}
-
-.fade-text.active {
-    opacity: 1;
-    filter: blur(0);
+.tags span:hover {
+    background: rgba(192, 192, 192, 0.3);
+    transform: scale(1.1);
 }
 
 /* Skills and Tags */
 .skill-tag {
-    background: rgba(0, 223, 255, 0.1);
+    background: var(--primary-light);
     color: var(--text);
     padding: 0.5rem 1rem;
     border-radius: 9999px;
@@ -179,9 +177,9 @@ body {
 }
 
 .skill-tag:hover {
-    background: rgba(0, 223, 255, 0.2);
+    background: rgba(192, 192, 192, 0.3);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 223, 255, 0.2);
+    box-shadow: 0 5px 15px var(--hover-glow);
 }
 
 /* Education Timeline */
@@ -226,18 +224,6 @@ body {
     animation: fadeIn 0.6s ease forwards;
 }
 
-/* Add styles for the typewriter container */
-.typewriter-container {
-    z-index: 100;
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
-
-.typewriter-container.hidden {
-    opacity: 0;
-}
-
 @keyframes float {
     0%, 100% {
         transform: translateY(0);
@@ -280,7 +266,7 @@ body {
 
 .enhanced-hover:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 30px rgba(0, 223, 255, 0.2);
+    box-shadow: 0 0 30px var(--hover-glow);
 }
 
 /* Responsive */
@@ -305,10 +291,6 @@ body {
     transform: translateY(-3px);
 }
 
-/* Gradient Background */
-.gradient-bg {
-    background: linear-gradient(45deg, rgba(31, 41, 55, 0.1), rgba(31, 41, 55, 0.1));
-}
 
 .rounded-border {
     border: 2px solid var(--primary);
@@ -322,32 +304,6 @@ body {
 
 @keyframes bounce {
     0%, 100% {
-        transform: translateX(-70px);
-    }
-    50% {
-        transform: translateX(-60px);
-    }
-}
-
-.glass-card {
-    background: rgba(31, 41, 55, 0.8);
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    box-shadow: 0 0 15px rgba(255, 255, 255);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.glass-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0px 15px rgba(0, 223, 255, 0.4);
-}
-
-.bounce-effect {
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% {
         transform: translateY(0);
     }
     50% {
@@ -355,25 +311,43 @@ body {
     }
 }
 
+.glass-card {
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow: 0 0 15px var(--primary-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0px 15px var(--hover-glow);
+}
+
+.bounce-effect {
+    animation: bounce 2s infinite;
+}
+
+/* Form Inputs */
 .form-input {
     width: 100%;
     padding: 12px 16px;
     border: none;
     border-radius: 8px;
-    background: rgba(31, 41, 55, 0.6);
-    color: #f9fafb;
+    background: rgba(26, 26, 26, 0.6);
+    color: var(--text);
     font-size: 1rem;
     outline: none;
     transition: background 0.3s ease;
 }
 
 .form-input:focus {
-    background: rgba(31, 41, 55, 0.8);
-    box-shadow: 0 0 10px rgba(0, 223, 255, 0.5);
+    background: rgba(26, 26, 26, 0.8);
+    box-shadow: 0 0 10px var(--primary-light);
 }
 
 .submit-btn {
-    background: var(--text);
+    background: var(--primary);
     color: var(--background);
     border: none;
     font-size: 1rem;
@@ -382,7 +356,7 @@ body {
 }
 
 .submit-btn:hover {
-    background: var(--primary);
+    background: var(--primary-dark);
     transform: translateY(-3px);
 }
 
