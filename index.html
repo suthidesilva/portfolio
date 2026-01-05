@@ -9,10 +9,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-<body class="bg-black text-gray-200">
+<body class="bg-gray-900 text-gray-100">
     <div class="cursor-glow"></div>
     <div class="cursor-dot"></div>
-    <canvas id="gradient-canvas" class="gradient-bg"></canvas>
+
+    <canvas id="gradient-canvas"></canvas>
 
     <div id="ai-beings-container">
         <canvas id="ai-being-1" class="ai-being"></canvas>
@@ -20,19 +21,19 @@
         <canvas id="ai-being-3" class="ai-being"></canvas>
     </div>
 
-    <nav class="fixed w-full top-0 z-50 bg-gray-900/80 backdrop-blur-sm">
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-gray-900/80 backdrop-blur-sm transition-transform duration-300">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="name-profession">
-                <span class="name text-silver">Suthira de Silva</span>
-                <span class="profession text-gray-400">AI/LLM Researcher</span>
+                <span class="name">Suthira de Silva</span>
+                <span class="profession">ML Researcher</span>
             </div>
-            <a href="#contact-card" class="text-xl font-bold logo-hover hire-me-bounce rounded-border">Hire me!</a>
             <div id="desktop-nav" class="hidden md:flex space-x-8">
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#work" class="nav-link">Projects</a>
                 <a href="#research" class="nav-link">Research</a>
+                <a href="#resume" class="nav-link">Resume</a>
                 <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#contact" class="nav-link">Hire Me !</a>
             </div>
             <button id="menu-toggle" class="md:hidden">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,18 +44,18 @@
     </nav>
 
     <div id="fade-text-container" class="fade-text-container">
-        <span id="fade-text" class="fade-text text-silver text-3xl md:text-7xl font-bold"></span>
+        <span id="fade-text" class="fade-text text-[#00DFFF] text-3xl md:text-7xl font-bold"></span>
     </div>
 
     <!-- Scroll Message -->
     <div class="scroll-message fixed left-1/2 transform -translate-x-1/2 bottom-12 z-50 flex items-center gap-4">
-        <div class="text-base md:text-lg text-silver font-medium tracking-wide">
+        <div class="text-base md:text-lg text-[#00DFFF] font-medium tracking-wide">
             Scroll down to explore my portfolio
         </div>
         <div class="scroll-indicator">
             <svg width="24" height="40" viewBox="0 0 24 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="22" height="38" rx="11" stroke="#D9D9D9" stroke-width="2"/>
-                <circle class="scroll-dot" cx="12" cy="10" r="4" fill="#D9D9D9"/>
+                <rect x="1" y="1" width="22" height="38" rx="11" stroke="#00DFFF" stroke-width="2"/>
+                <circle class="scroll-dot" cx="12" cy="10" r="4" fill="#00DFFF"/>
             </svg>
         </div>
     </div>
@@ -70,50 +71,80 @@
 
     <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-4 py-32 relative z-10">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight text-silver">
-                Hi, I'm <span class="text-silver sds-name-hover">Suthira de Silva</span><span class="text-silver">.</span>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                I'm <span class="text-[#00DFFF] sds-name-hover">Suthira de Silva</span><span class="text-[#00DFFF]">.</span>
             </h1>
-            <p class="text-xl text-gray-400">
-                AI / LLM Researcher and Computer Science Student at College of Idaho,
-                focused on integrating Large Language Models with microcontrollers and automation systems.
+            <p class="text-xl text-gray-300">
+                ML Researcher focused on harnessing ML modeling to address pressing global challenges.
             </p>
+        </div>
+    </section>
+
+    <section id="resume" class="py-32">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-white">Resume, CV, & Certifications</h2><br><br>
+    
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="resume-card bounce-smooth glass-card">
+                    <i data-feather="file-text" class="text-[#00DFFF] w-12 h-12 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Resume</h3>
+                    <a href="https://drive.google.com/file/d/1b7hSyousjk9uMHdaco6ixTXCViS3QU-2/view?usp=sharing" 
+                       class="btn-glass" target="_blank" rel="noopener noreferrer">
+                       View Resume
+                    </a>
+                </div>
+                <div class="resume-card bounce-smooth glass-card">
+                    <i data-feather="mail" class="text-[#00DFFF] w-12 h-12 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Curriculum Vitae</h3>
+                    <a href="https://drive.google.com/file/d/1ujWcbV7kE0fB6iw4BUqKNWpXgsDGfcHF/view?usp=sharing" class="btn-glass" target="_blank" rel="noopener noreferrer">
+                       View CV
+                    </a>
+                </div>
+                <div class="resume-card bounce-smooth glass-card">
+                    <i data-feather="trending-up" class="text-[#00DFFF] w-12 h-12 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Certifications</h3>
+                    <a href="https://www.linkedin.com/in/desilvasuthira/details/certifications/" 
+                       class="btn-glass" target="_blank" rel="noopener noreferrer">
+                       View Certs
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="skills" class="py-32">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-16 text-silver">Skills</h2>
-            <div id="skills-list" class="flex flex-wrap gap-2"></div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-32">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-16 text-silver">Projects</h2>
-            <div id="projects-grid" class="grid md:grid-cols-2 gap-8"></div>
+            <h2 class="text-3xl font-bold mb-16 text-center">Skills</h2>
+            <div id="skills-list" class="flex flex-wrap gap-2">
+            </div>
         </div>
     </section>
     
-    <section id="research" class="py-32">
+    <section id="work" class="py-32">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-16 text-silver">Research</h2>
+            <h2 class="text-3xl font-bold mb-16 text-center">Featured Projects</h2>
+            <div id="projects-grid" class="grid md:grid-cols-2 gap-8"></div>
+        </div>
+    </section>
+
+    <section id="research"  class="py-32">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-16 text-center">Research & Work Experience</h2>
             <div id="research-content" class="space-y-8"></div>
         </div>
     </section>
 
     <section id="about" class="py-32">
         <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-8 text-silver">About Me</h2>
-            <p class="text-gray-400 mb-12">
-                I am an AI/LLM Researcher at the College of Idaho, where I conduct
-                independent studies on integrating Large Language Models with
-                microcontrollers and Arduino automation systems. With a background in
-                computer science and physics, I am passionate about applying technology
-                to solve complex problems.
+            <h2 class="text-3xl font-bold mb-8 text-center">About Me</h2>
+            <p class="text-gray-300 mb-12">
+                I am an ML Researcher at Boise State University, where I use ML modeling techniques to address pressing global challenges. 
+                My work spans developing microplastic identification models using TensorFlow, and integrating LLMs into microcontrollers for spectral analysis to study Be stars. 
+                With a solid foundation in computer science and physics, I have a passion for interdisciplinary problem solving, and create impactful collaborations.
             </p>
             <div class="grid md:grid-cols-1 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-4 text-silver">Education</h3>
+                    <h3 class="text-xl font-bold mb-4">Education</h3>
                     <div id="education-list"></div>
                 </div>
             </div>
@@ -123,7 +154,7 @@
     <section id="contact-card" class="py-16">
         <div class="max-w-3xl mx-auto px-4">
             <div class="glass-card bounce-effect shadow-lg p-8 rounded-lg relative">
-                <h2 class="text-3xl font-bold text-center mb-4 text-silver">Wanna hire me? Contact Me</h2>
+                <h2 class="text-3xl font-bold text-center mb-4">Wanna hire me? Contact Me</h2>
                 <form id="contact-form" class="space-y-4">
                     <div>
                         <label for="name" class="block text-lg font-medium">Name</label>
@@ -145,14 +176,14 @@
     
     <section id="contact" class="py-32">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-8 text-silver">Get in Touch</h2>
+            <h2 class="text-3xl font-bold mb-8">Get in Touch</h2>
             <div id="social-links" class="flex justify-center space-x-6"></div>
         </div>
     </section>
 
     <footer class="py-8">
         <div class="max-w-7xl mx-auto px-4 text-center text-gray-400">
-            © <span id="current-year"></span> - Suthira de Silva - Based in Caldwell, Idaho
+            © <span id="current-year"></span> - Suthira de Silva - Based in Boise, Idaho
         </div>
     </footer>
 
